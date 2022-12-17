@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace pet_shop.Models
 {
@@ -21,6 +23,22 @@ namespace pet_shop.Models
         public string adress { get; set; }
         public string city { get; set; }
         public string owner { get; set; }
-        //тут нужен тип времени хотя можно попробовать пока без него, потом добавить когда найду тип хранения
+
+        public override bool Equals(Object obj)
+        {
+            //Check for null and compare run-time types.
+            if ((obj == null) || !this.GetType().Equals(obj.GetType()))
+            {
+                return false;
+            }
+            else
+            {
+                Shop shop= (Shop)obj;
+                return (id == shop.id) &&
+                        (adress == shop.adress) &&
+                        (owner == shop.owner) &&
+                        (city == shop.city);
+            }
+        }
     }
 }

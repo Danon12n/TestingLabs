@@ -75,6 +75,7 @@ namespace pet_shop.Controllers
                 int petId = petRep.GetPetNewId();
                 Console.WriteLine("PetId = " + petId + "\nshopId = " + shopId);
 
+
                 var pet = new Pet(petId, shopId, Convert.ToInt32(collection["price"]));
                 petRep.AddPetPrice(pet);
 

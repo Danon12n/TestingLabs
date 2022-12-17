@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -34,6 +35,25 @@ namespace pet_shop.Models
         public string name { get; set; }
         public string surname { get; set; }
         public string role { get; set; }// admin vendor customer
+
+        public override bool Equals(Object obj)
+        {
+            //Check for null and compare run-time types.
+            if ((obj == null) || !this.GetType().Equals(obj.GetType()))
+            {
+                return false;
+            }
+            else
+            {
+                User user = (User)obj;
+                return (id == user.id) && 
+                        (login == user.login) && 
+                        (password == user.password) && 
+                        (name == user.name) && 
+                        (surname == user.surname) && 
+                        (role == user.role);
+            }
+        }
 
     }
 }
