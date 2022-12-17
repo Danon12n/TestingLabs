@@ -31,7 +31,7 @@ namespace pet_shop.Tests
         [AllureFeature("Core")]
         [AllureId(123)]
         public void EvenTest()
-        {
+    {
             SayHello();
             PetMySQLRepository rep = new PetMySQLRepository();
             Pet newpet = rep.GetPetById(3);
