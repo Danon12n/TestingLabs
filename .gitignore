@@ -31,3 +31,4 @@ msbuild.wrn
 
 # Visual Studio 2015
 .vs/
+pet_shop/DB/DBMySQLUtiles.cs

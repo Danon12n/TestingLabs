@@ -283,7 +283,7 @@ namespace pet_shop.MySQLRepository
                             pet.pet_id = Convert.ToInt32(reader.GetValue(reader.GetOrdinal("pet_id")));
                             pet.price = Convert.ToInt32(reader.GetValue(reader.GetOrdinal("price")));
                             pet.shop_id = Convert.ToInt32(reader.GetValue(reader.GetOrdinal("shop_id")));
-                            pet.availability = reader.GetString(reader.GetOrdinal("availability"));
+                            pet.availability = reader.GetString(reader.GetOrdinal("available"));
 
 
                             Console.WriteLine("Питомец успешно найден!");
