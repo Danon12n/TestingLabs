@@ -1,0 +1,19 @@
+﻿@{
+    ViewData["Title"] = "Sign In";
+    
+}
+
+<h2>@ViewData["Message"]</h2>
+<form class="row g-3" asp-action="Check" method="post">
+    <div class="col-md-4">
+        <label for="validationDefaultUsername" class="form-label">Login</label>
+        <input type="text" class="form-control" id="validationDefaultUsername" name="login" required>
+    </div>
+    <div class="col-md-6">
+        <label for="validationDefault03" class="form-label">Password</label>
+        <input type="password" class="form-control" id="validationDefault03" name="password" required>
+    </div>
+    <div class="col-12">
+        <button class="btn btn-primary" type="submit">SignIn</button>
+    </div>
+</form>

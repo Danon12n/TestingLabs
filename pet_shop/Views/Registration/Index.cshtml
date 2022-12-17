@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewData["Title"] = "Registration";
+}
+
+
+<form class="row g-3" action="Registration/Create" method="post">
+    <div class="col-md-4">
+        <label for="validationDefault01" class="form-label">First name</label>
+        <input type="text" class="form-control" id="validationDefault01" name="name" required>
+    </div>
+    <div class="col-md-4">
+        <label for="validationDefault02" class="form-label">Last name</label>
+        <input type="text" class="form-control" id="validationDefault02" name="surname" required>
+    </div>
+    <div class="col-md-4">
+        <label for="validationDefaultUsername" class="form-label">Login</label>
+        <input type="text" class="form-control" id="validationDefaultUsername" name="login" required>
+
+    </div>
+    <div class="col-md-6">
+        <label for="validationDefault03" class="form-label">Password</label>
+        <input type="password" class="form-control" id="validationDefault03" name="password" required>
+    </div>
+    <div class="col-12">
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>
+            <label class="form-check-label" for="invalidCheck2">
+                Agree to terms and conditions
+            </label>
+        </div>
+    </div>
+    <div class="col-12">
+        <button class="btn btn-primary" type="submit">Submit form</button>
+    </div>
+</form>
+

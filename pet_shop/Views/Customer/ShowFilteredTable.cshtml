@@ -1,0 +1,113 @@
+﻿<h1>Testing Filter</h1>
+
+<!--filter input-->
+<form class="row g-3" method="post" asp-controller="Customer" asp-action="Filter">
+
+    <div class="col-md-10">
+        <label for="validationDefault08" class="form-label">Pet type</label>
+        <select class="form-select" id="validationDefault08" required name="petType">
+            <option selected>Any</option>
+            <option>Cat</option>
+            <option>Dog</option>
+            <option>Raccoon</option>
+            <option>Fox</option>
+            <option>Hedgehog</option>
+        </select>
+    </div>
+
+    <div class="col-md-10">
+        <label for="validationDefault06" class="form-label">Pet Gender</label>
+        <select class="form-select" id="validationDefault06" required name="gender">
+            <option selected>Any</option>
+            <option>Male</option>
+            <option>Female</option>
+        </select>
+    </div>
+
+    <div class="col-md-10">
+        <label for="validationDefault07" class="form-label">Pet Swim ability</label>
+        <select class="form-select" id="validationDefault07" required name="canSwim">
+            <option selected>Any</option>
+            <option>Yes</option>
+            <option>No</option>
+        </select>
+    </div>
+
+    <div class="col-md-10">
+        <label for="validationDefault10" class="form-label">Pet reproduce ability</label>
+        <select class="form-select" id="validationDefault10" required name="reproduceAbility">
+            <option selected>Any</option>
+            <option>Yes</option>
+            <option>No</option>
+        </select>
+    </div>
+
+    <div class="col-md-4">
+        <label for="validationDefault04" class="form-label">Price From</label>
+        <input type="text" class="form-control" id="validationDefault04" name="priceFrom" value="0" required>
+    </div>
+    <div class="col-md-4">
+        <label for="validationDefault05" class="form-label">Price To</label>
+        <input type="text" class="form-control" id="validationDefault05" name="priceTo" value="1000000" required>
+    </div>
+
+    <div class="col-md-10">
+        <label for="validationDefault09" class="form-label">Shops</label>
+        <select class="form-select" id="validationDefault09" required name="adress">
+            <option selected>Any</option>
+            @foreach (string adress in ViewBag.Shops)
+            {
+            <option>@adress</option>
+            }
+        </select>
+    </div>
+
+
+    <div class="col-12">
+        <button class="btn btn-primary" type="submit">Start Searching</button>
+    </div>
+</form>
+<!--filter input-->
+<!--filter output-->
+<table class="table-primary table-striped col-md-12">
+    <thead>
+        <tr>
+            <th scope="col">id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Pet type</th>
+            <th scope="col">Age</th>
+            <th scope="col">Color</th>
+            <th scope="col">Swim Ability</th>
+            <th scope="col">Reproduce Ability</th>
+            <th scope="col">Gender</th>
+            <th scope="col">Pet Breed</th>
+            <th scope="col">Price</th>
+            <th scope="col">Shop Adress</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (pet_shop.Models.DisplayInfo display in Model)
+        {
+        <tr>
+            <td>@display.pet_id</td>
+            <td>@display.name</td>
+            <td>@display.pet_type</td>
+            <td>@display.age</td>
+            <td>@display.color</td>
+            <td>@display.can_swim</td>
+            <td>@display.reproduce_ability</td>
+            <td>@display.gender</td>
+            <td>@display.pet_breed</td>
+            <td>@display.price</td>
+            <td>@display.adress</td>
+            <td>
+                <form id="data1" asp-action="CreateOrder" method="post">
+                    <button class="btn-warning" type="submit">Create Order</button>
+                    <input type="hidden" name="petId" value=@display.pet_id />
+                </form>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+<!--filter output-->

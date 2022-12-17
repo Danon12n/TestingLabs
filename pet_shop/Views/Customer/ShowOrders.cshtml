@@ -1,0 +1,47 @@
+﻿
+<h1>My Orders:</h1>
+
+<table class="table-primary table-striped col-md-12">
+    <thead>
+        <tr>
+            <th scope="col">order number</th>
+            <th scope="col">id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Pet type</th>
+            <th scope="col">Age</th>
+            <th scope="col">Color</th>
+            <th scope="col">Swim Ability</th>
+            <th scope="col">Reproduce Ability</th>
+            <th scope="col">Gender</th>
+            <th scope="col">Pet Breed</th>
+            <th scope="col">Price</th>
+            <th scope="col">Shop Adress</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (pet_shop.Models.DisplayInfo display in Model)
+        {
+        <tr>
+            <td>@display.order_number</td>
+            <td>@display.pet_id</td>
+            <td>@display.name</td>
+            <td>@display.pet_type</td>
+            <td>@display.age</td>
+            <td>@display.color</td>
+            <td>@display.can_swim</td>
+            <td>@display.reproduce_ability</td>
+            <td>@display.gender</td>
+            <td>@display.pet_breed</td>
+            <td>@display.price</td>
+            <td>@display.adress</td>
+            <td>
+                <form id="data1" asp-action="RefuseOrder" method="post">
+                    <button class="btn-warning" type="submit">Refuse Order</button>
+                    <input type="hidden" name="orderNumber" value=@display.order_number />
+                    <input type="hidden" name="petId" value=@display.pet_id />
+                </form>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,22 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h3 class="display-4">
+        Welcome to the Teplo Pet Shop
+    </h3>
+</div>
+
+<p>
+    <a class="btn btn-outline-primary btn-lg" asp-controller="Registration" asp-action="Index" type="submit">Register</a>
+</p>
+<p>
+    <a class="btn btn-outline-primary btn-lg" asp-controller="SignIn" asp-action="Index" type="submit">Sign In</a>
+</p>
+
+<footer class="border-top footer text-muted" align="right">
+    <div class="container">
+        System message: @ViewData["Message"]
+    </div>
+</footer>

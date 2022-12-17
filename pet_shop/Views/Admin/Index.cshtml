@@ -1,0 +1,42 @@
+﻿<h1>Hello Admin</h1>
+
+
+<table class="table-primary table-striped col-md-12">
+    <thead>
+        <tr>
+            <th scope="col">id</th>
+            <th scope="col">Login</th>
+            <th scope="col">Name</th>
+            <th scope="col">Role</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(pet_shop.Models.User user in Model)
+        {
+        <tr>
+            <td>@user.id</td>
+            <td>@user.login</td>
+            <td>@user.name</td>
+            <td>@user.role</td>
+            <td>
+                <form id="data1" asp-action="MakeCustomer" method="post">
+                    <button class="btn-warning" type="submit">MakeCustomer</button>
+                    <input type="hidden" name="userId" value=@user.id />
+                </form>
+            </td>
+            <td>
+                <form id="data2" asp-action="MakeVendor" method="post">
+                    <button class="btn-warning" type="submit">MakeVendor</button>
+                    <input type="hidden" name="userId" value=@user.id />
+                    </form>
+            </td>
+            <td>
+                <form id="data3" asp-action="DeleteUser" method="post">
+                    <button class="btn-danger" type="submit">DeleteUser</button>
+                    <input type="hidden" name="userId" value=@user.id />
+                </form>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

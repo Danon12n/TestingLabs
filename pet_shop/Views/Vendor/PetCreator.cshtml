@@ -1,0 +1,77 @@
+﻿
+
+
+<form class="row g-3" method="post" asp-controller="Vendor" asp-action="AddNewPet">
+    <div class="col-md-4">
+        <label for="validationDefault02" class="form-label">Pet Name</label>
+        <input type="text" class="form-control" id="validationDefault02" name="name" required>
+    </div>
+    <div class="col-md-4">
+        <label for="validationDefault03" class="form-label">Pet Age</label>
+        <input type="text" class="form-control" id="validationDefault03" name="age" required>
+    </div>
+    <div class="col-md-4">
+        <label for="validationDefault04" class="form-label">Pet Color</label>
+        <input type="text" class="form-control" id="validationDefault04" name="color" required>
+    </div>
+    <div class="col-md-4">
+        <label for="validationDefault05" class="form-label">Pet Breed</label>
+        <input type="text" class="form-control" id="validationDefault05" name="pet_breed" required>
+    </div>
+    <div class="col-md-10">
+        <label for="validationDefault06" class="form-label">Pet Gender</label>
+        <select class="form-select" id="validationDefault06" required name="gender">
+            <option selected disabled value="">Choose...</option>
+            <option>Male</option>
+            <option>Female</option>
+        </select>
+    </div>
+
+    <div class="col-md-10">
+        <label for="validationDefault07" class="form-label">Pet Swim ability</label>
+        <select class="form-select" id="validationDefault07" required name="can_swim">
+            <option selected disabled value="">Choose...</option>
+            <option>Yes</option>
+            <option>No</option>
+        </select>
+    </div>
+
+    <div class="col-md-10">
+        <label for="validationDefault07" class="form-label">Pet reproduce ability</label>
+        <select class="form-select" id="validationDefault07" required name="reproduce_ability">
+            <option selected disabled value="">Choose...</option>
+            <option>Yes</option>
+            <option>No</option>
+        </select>
+    </div>
+
+    <div class="col-md-10">
+        <label for="validationDefault08" class="form-label">Pet type</label>
+        <select class="form-select" id="validationDefault08" required name="pet_type">
+            <option selected disabled value="">Choose...</option>
+            <option>Cat</option>
+            <option>Dog</option>
+            <option>Raccoon</option>
+            <option>Fox</option>
+            <option>Hedgehog</option>
+        </select>
+    </div>
+
+    <div class="col-md-10">
+        <label for="validationDefault09" class="form-label">Shops</label>
+        <select class="form-select" id="validationDefault09" required name="shop_id">
+            <option selected disabled value="">Choose...</option>
+            @foreach (string adress in ViewBag.Shops)
+            {
+            <option>@adress</option>
+            }
+        </select>
+    </div>
+    <div class="col-md-4">
+        <label for="validationDefault01" class="form-label">Pet Price</label>
+        <input type="text" class="form-control" id="validationDefault01" name="price" required>
+    </div>
+    <div class="col-12">
+        <button class="btn btn-primary" type="submit">Add Pet</button>
+    </div>
+</form>
