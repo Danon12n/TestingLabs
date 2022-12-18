@@ -41,7 +41,6 @@ namespace pet_shop.Models
             {
                 Order order = (Order)obj;
                 return  (pet_id == order.pet_id) &&
-                        (order_number == order.order_number) &&
                         (user_id == order.user_id);
             }
         }

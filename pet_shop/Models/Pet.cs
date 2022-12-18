@@ -37,7 +37,7 @@ namespace pet_shop.Models
             else
             {
                 Pet pet = (Pet)obj;
-                return (pet_id == pet.pet_id) &&
+                return 
                         (shop_id == pet.shop_id) &&
                         (price == pet.price) &&
                         (availability == pet.availability);

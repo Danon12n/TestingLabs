@@ -43,7 +43,7 @@ namespace pet_shop.Models
             else
             {
                 PetInfo PI = (PetInfo)obj;
-                return (pet_id == PI.pet_id) &&
+                return 
                         (pet_type == PI.pet_type) &&
                         (pet_breed == PI.pet_breed) &&
                         (age == PI.age) &&

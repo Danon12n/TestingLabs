@@ -46,7 +46,7 @@ namespace pet_shop.Models
             else
             {
                 User user = (User)obj;
-                return (id == user.id) && 
+                return 
                         (login == user.login) && 
                         (password == user.password) && 
                         (name == user.name) && 

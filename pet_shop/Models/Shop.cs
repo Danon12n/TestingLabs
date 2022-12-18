@@ -34,7 +34,7 @@ namespace pet_shop.Models
             else
             {
                 Shop shop= (Shop)obj;
-                return (id == shop.id) &&
+                return 
                         (adress == shop.adress) &&
                         (owner == shop.owner) &&
                         (city == shop.city);

@@ -32,3 +32,6 @@ msbuild.wrn
 # Visual Studio 2015
 .vs/
 pet_shop/DB/DBMySQLUtiles.cs
+
+# Allure
+allure-2.20.1/
