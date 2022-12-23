@@ -11,7 +11,7 @@ using pet_shop.Models;
 
 namespace pet_shop.MySQLRepository
 {
-    public class ShopMySQLRepository
+    public class ShopMySQLRepository : IShopMySQLRepository
     {
 
         private MySqlCommand cmd = new MySqlCommand(); // команда для совершения sql-запроса

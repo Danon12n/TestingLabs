@@ -12,6 +12,10 @@ namespace pet_shop.Controllers
 {
     public class CustomerController : Controller
     {
+        public CustomerController(IShopMySQLRepository repo)
+        {
+
+        }
        
         public ActionResult Index()
         {
