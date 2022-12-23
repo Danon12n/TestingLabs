@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <Folder Include="IRepository\" />
+    <Folder Include="Buider\" />
   </ItemGroup>
 
   <ItemGroup>

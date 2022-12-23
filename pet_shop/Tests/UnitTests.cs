@@ -252,7 +252,7 @@ namespace pet_shop.Tests
         [AllureIssue("GitHub#1", "https://github.com/Danon12n/TestingLabs")]
         [AllureSeverity(SeverityLevel.critical)]
         [AllureFeature("OrderMySQLRepository")]
-        [AllureId(42)]
+        [AllureId(43)]
         public void GetOrdersTest()
         {
             //Arrange
@@ -275,7 +275,10 @@ namespace pet_shop.Tests
                     flag++; 
                 }
             }
-            
+            var orderedPets = rep.GetOrderedPets(-10);
+            rep.DeleteOrderByNumber(orderedPets[0][1]);
+            rep.DeleteOrderByNumber(orderedPets[1][1]);
+
 
             //Wrapping Step
             AllureLifecycle.Instance.WrapInStep(
