@@ -54,6 +54,31 @@ namespace pet_shop.Models
         public string adress { get; set; } //адрес магазина
         public int price { get; set; }// цена животного
 
-       
+
+        public override bool Equals(Object obj)
+        {
+            //Check for null and compare run-time types.
+            if ((obj == null) || !this.GetType().Equals(obj.GetType()))
+            {
+                return false;
+            }
+            else
+            {
+                DisplayInfo displayInfo = (DisplayInfo)obj;
+                return (pet_id == displayInfo.pet_id) &&
+                        (pet_type == displayInfo.pet_type) &&
+                        (pet_breed == displayInfo.pet_breed) &&
+                        (age == displayInfo.age) &&
+                        (name == displayInfo.name) &&
+                        (color == displayInfo.color) &&
+                        (gender == displayInfo.gender) &&
+                        (can_swim == displayInfo.can_swim) &&
+                        (reproduce_ability == displayInfo.reproduce_ability) &&
+                        (order_number == displayInfo.order_number) &&
+                        (price == displayInfo.price) &&
+                        (adress == displayInfo.adress);
+            }
+        }
+
     }
 }

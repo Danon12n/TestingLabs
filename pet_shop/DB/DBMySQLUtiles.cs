@@ -15,7 +15,7 @@ namespace pet_shop.DB
         {
             // Connection String.
             String connString = "Server=" + host + ";Database=" + database
-                + ";port=" + port + ";User Id=" + username + ";password=" + password + ";SSL Mode=Required";
+                + ";port=" + port + ";User Id=" + username + ";password=" + password + ";SSL Mode=none";
 
 
             MySqlConnection conn = new MySqlConnection(connString);
