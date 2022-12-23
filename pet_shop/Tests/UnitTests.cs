@@ -9,6 +9,7 @@ using Moq;
 using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
 using pet_shop.Controllers;
+using NUnit.Framework.Constraints;
 
 namespace pet_shop.Tests
 {
@@ -162,9 +163,124 @@ namespace pet_shop.Tests
                 "Validate calculations");
 
         }
+
+        private bool CheckOrders(List<List<int>> orders, List<int> expected)
+        {
+            bool isEveryEqual = true;
+            int i = 0;
+            foreach (var order in orders)
+            {
+                if (order[0] != expected[i])
+                {
+                    isEveryEqual = false; 
+                    break;
+                }
+                i++;
+            }
+            return isEveryEqual;
+        }
+
+
+        [Test]
+        [AllureTag("NUnit", "Debug")]
+        [AllureIssue("GitHub#1", "https://github.com/Danon12n/TestingLabs")]
+        [AllureSeverity(SeverityLevel.critical)]
+        [AllureFeature("OrderMySQLRepository")]
+        [AllureId(40)]
+        public void GetOrderedPetsTest()
+        {
+            //Arrange
+            OrderMySqlRepository rep = new OrderMySqlRepository();
+            List<int> expected = new List<int> { 15, 20 };
+            int userId = 1;
+            //Act
+            var newOrders = rep.GetOrderedPets(userId);
+            //Wrapping Step
+            AllureLifecycle.Instance.WrapInStep(
+                () => { Assert.IsTrue(CheckOrders(newOrders, expected), $"Oh no! "); },
+                "Validate calculations");
+
+        }
+
+        [Test]
+        [AllureTag("NUnit", "Debug")]
+        [AllureIssue("GitHub#1", "https://github.com/Danon12n/TestingLabs")]
+        [AllureSeverity(SeverityLevel.critical)]
+        [AllureFeature("OrderMySQLRepository")]
+        [AllureId(41)]
+        public void CreateOrderTest()
+        {
+            //Arrange
+            OrderMySqlRepository rep = new OrderMySqlRepository();
+            List<int> expectedOrders = new List<int> { -10};
+            Order newOrder = new Order(-10, -10);
+            //Act
+            rep.CreateOrder(newOrder);
+            var resultOrders = rep.GetOrderedPets(-10);
+            //Wrapping Step
+            AllureLifecycle.Instance.WrapInStep(
+                () => { Assert.IsTrue(CheckOrders(resultOrders, expectedOrders), $"Oh no! "); },
+                "Validate calculations");
+        }
         
 
+        [Test]
+        [AllureTag("NUnit", "Debug")]
+        [AllureIssue("GitHub#1", "https://github.com/Danon12n/TestingLabs")]
+        [AllureSeverity(SeverityLevel.critical)]
+        [AllureFeature("OrderMySQLRepository")]
+        [AllureId(42)]
+        public void DeleteOrderByNumberTest()
+        {
+            //Arrange
+            OrderMySqlRepository rep = new OrderMySqlRepository();
+            var expectedOrder = rep.GetOrderedPets(-10);
+            int orderNumber = expectedOrder[0][1];
+            //Act
+            rep.DeleteOrderByNumber(orderNumber);
 
+            //Wrapping Step
+            AllureLifecycle.Instance.WrapInStep(
+                () => { Assert.IsTrue(rep.GetOrderedPets(-10).Capacity == 0, $"Oh no! "); },
+                "Validate calculations");
+        }
+        
+
+        [Test]
+        [AllureTag("NUnit", "Debug")]
+        [AllureIssue("GitHub#1", "https://github.com/Danon12n/TestingLabs")]
+        [AllureSeverity(SeverityLevel.critical)]
+        [AllureFeature("OrderMySQLRepository")]
+        [AllureId(42)]
+        public void GetOrdersTest()
+        {
+            //Arrange
+            OrderMySqlRepository rep = new OrderMySqlRepository();
+            Order newOrder1 = new Order(-10, -1);
+            Order newOrder2 = new Order(-10, -2);
+
+            rep.CreateOrder(newOrder1);
+            rep.CreateOrder(newOrder2);
+
+            Order[] expectedOrders = new[] { newOrder1, newOrder2 };
+            //Act
+            var resultOrders = rep.GetOrders();
+
+            var flag = 0;
+            foreach (Order order in resultOrders)
+            {
+                if (order.Equals(expectedOrders[0]) || order.Equals(expectedOrders[1]))
+                {
+                    flag++; 
+                }
+            }
+            
+
+            //Wrapping Step
+            AllureLifecycle.Instance.WrapInStep(
+                () => { Assert.IsTrue(flag == 2, $"Oh no! "); },
+                "Validate calculations");
+        }
 
 
 
