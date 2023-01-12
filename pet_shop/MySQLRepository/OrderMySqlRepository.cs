@@ -59,6 +59,32 @@ namespace pet_shop.MySQLRepository
             Console.WriteLine("Заказ успешно добавлен");
         }
 
+        public void CreateOrderWithId(Order order)
+        {
+            string sql = "Insert into `orders` (order_number, user_id, pet_id) "
+                                            + " values (@order_number, @userId, @petId) ";
+            cmd = new MySqlCommand();
+            cmd.CommandText = sql;
+            cmd.Connection = conn;
+
+            cmd.Parameters.Add("@order_number", MySqlDbType.Int32).Value = order.order_number;
+            cmd.Parameters.Add("@userId", MySqlDbType.Int32).Value = order.user_id;
+            cmd.Parameters.Add("@petId", MySqlDbType.Int32).Value = order.pet_id;
+
+            try
+            {
+                int rowCount = cmd.ExecuteNonQuery();
+                Console.WriteLine("Row Count affected = " + rowCount);
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error: " + e);
+            }
+
+            Console.WriteLine("Заказ успешно добавлен");
+        }
+
         public List<List<int>> GetOrderedPets(int userId)
         {
             string sql = "Select pet_id, order_number from `orders` where user_id = @userId ";

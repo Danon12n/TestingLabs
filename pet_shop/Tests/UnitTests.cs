@@ -391,9 +391,10 @@ namespace pet_shop.Tests
 
                 // Arrange
                 var orderRepo = new OrderMySqlRepository();
+                orderRepo.DeleteOrderByNumber(-30);
                 Order order = new Order(-30, -30, -30);
                 var ExpectedList = new List<int>() { -30 };
-                orderRepo.CreateOrder(order);
+                orderRepo.CreateOrderWithId(order);
                 
                 // Act
                 var result = orderRepo.GetOrderedPets(-10);
