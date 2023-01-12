@@ -59,11 +59,16 @@ namespace pet_shop.MySQLRepository
             }
             return shops;
         }
+
         public void AddNewShop(Shop shop)
         {
-            string sql = "Insert into 'shops' (shop_id, adress, city, owner) values (" + shop.id + ", " + shop.adress + ", " + shop.city + ", " + shop.owner + ")";
+            string sql = "Insert into 'shops' (shop_id, adress, city, owner) values (@id, @adress, @city, @owner) ";
             cmd = new MySqlCommand();
             cmd.CommandText = sql;
+            cmd.Parameters.Add("@id", MySqlDbType.Int16).Value = shop.id;
+            cmd.Parameters.Add("@adress", MySqlDbType.String).Value = shop.adress;
+            cmd.Parameters.Add("@city", MySqlDbType.String).Value = shop.city;
+            cmd.Parameters.Add("@owner", MySqlDbType.String).Value = shop.owner;
             cmd.Connection = conn;
             int rowCount = cmd.ExecuteNonQuery();
 
