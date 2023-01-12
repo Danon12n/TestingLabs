@@ -19,11 +19,6 @@ namespace pet_shop.Tests
     [AllureLink("https://github.com/Danon12n/TestingLabs")]
     public class UnitTests
     {
-        [OneTimeSetUp]
-        public void ClearResultsDir()
-        {
-            AllureLifecycle.Instance.CleanupResultDirectory();
-        }
 
         //Allure.Steps required
         [AllureStep("This method is just saying hello")]
