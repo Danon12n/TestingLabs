@@ -20,11 +20,7 @@ namespace MockTests.Tests
     [AllureLink("https://github.com/Danon12n/TestingLabs")]
     public class MockTests
     {
-        [OneTimeSetUp]
-        public void ClearResultsDir()
-        {
-            AllureLifecycle.Instance.CleanupResultDirectory();
-        }
+        
 
         //Allure.Steps required
         [AllureStep("This method is just saying hello")]
@@ -38,7 +34,7 @@ namespace MockTests.Tests
         [AllureIssue("GitHub#1", "https://github.com/Danon12n/TestingLabs")]
         [AllureSeverity(SeverityLevel.critical)]
         [AllureFeature("CustomerController")]
-        [AllureId(23)]
+        [AllureId(233)]
         public void ShowFilteredTableTest()
         {
             // Arrange
@@ -79,7 +75,7 @@ namespace MockTests.Tests
         [AllureIssue("GitHub#1", "https://github.com/Danon12n/TestingLabs")]
         [AllureSeverity(SeverityLevel.critical)]
         [AllureFeature("CustomerController")]
-        [AllureId(22)]
+        [AllureId(222)]
         public void CheckFreeIdPetMockTest()
         {
             // Arrange

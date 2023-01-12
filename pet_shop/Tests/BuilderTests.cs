@@ -12,11 +12,7 @@ namespace pet_shop.Tests
     [AllureLink("https://github.com/Danon12n/TestingLabs")]
     public class BuilderTests
     {
-        [OneTimeSetUp]
-        public void ClearResultsDir()
-        {
-            AllureLifecycle.Instance.CleanupResultDirectory();
-        }
+       
 
         public bool checkFood(PetsFood food, string expectedState, string expectedAnimal)
         {
@@ -27,9 +23,9 @@ namespace pet_shop.Tests
         [Test]
         [AllureTag("NUnit", "Debug")]
         [AllureIssue("GitHub#1", "https://github.com/unickq/allure-nunit")]
-        [AllureSeverity(SeverityLevel.normal)]
+        [AllureSeverity(SeverityLevel.critical)]
         [AllureFeature("Builder")]
-        [AllureId(51)]
+        [AllureId(5112)]
         public void PetsFoodTest()
         {
             ICooker PurinaCooker = new Purina();

@@ -19,11 +19,7 @@ namespace pet_shop.Tests
     [AllureLink("https://github.com/Danon12n/TestingLabs")]
     public class ShopUnitTests
     {
-        [OneTimeSetUp]
-        public void ClearResultsDir()
-        {
-            AllureLifecycle.Instance.CleanupResultDirectory();
-        }
+       
 
         //Allure.Steps required
         [AllureStep("This method is just saying hello")]
@@ -39,7 +35,7 @@ namespace pet_shop.Tests
         [AllureIssue("GitHub#1", "https://github.com/Danon12n/TestingLabs")]
         [AllureSeverity(SeverityLevel.critical)]
         [AllureFeature("UserMySQLRepository")]
-        [AllureId(3)]
+        [AllureId(333)]
         public void GetUserByIdTest()
         {
             //Arrange
