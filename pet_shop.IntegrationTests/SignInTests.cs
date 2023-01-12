@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.Testing;
 using Moq;
+using MySqlX.XDevAPI;
 using NUnit.Framework;
 using pet_shop.Controllers;
 using pet_shop.MySQLRepository;
@@ -18,7 +19,7 @@ namespace pet_shop.IntegrationTests
     public class SignInTests
     {
         [Test]
-        public async Task SignInTest()
+        public async Task SignIn_WithIncorrectData_ReturnsMessageThatUserWasntFound()
         {
             // Arrange
 
@@ -26,21 +27,103 @@ namespace pet_shop.IntegrationTests
 
             HttpClient client = webHost.CreateClient();
 
-            var data = new SignInFormData("notExistingLogin........", "password");
-
-            var mock = new Mock<IUserMySQLRepository>();
-            mock.Setup(a => a.GetUserByLogin(data.login)).Returns(new Models.User() );
-            SignInController controller = new SignInController();
-            string expected = "Пользователь не найден!";
+            var postRequest = new HttpRequestMessage(HttpMethod.Post, "https://localhost:5001/SignIn/Check");
+            var data = new Dictionary<string, string>
+            {
+                {"login", "lalalala" },
+                {"password","lalalala" }
+            };
+            postRequest.Content = new FormUrlEncodedContent(data);
 
             // Act
-            
-
-            HttpResponseMessage response = await client.PostAsJsonAsync("https://localhost:5001/SignIn/Check", data) ;
+            var response = await client.SendAsync(postRequest);
 
             // Assert
+            response.EnsureSuccessStatusCode();
+            var responseString = await response.Content.ReadAsStringAsync();
+            Assert.IsTrue(responseString.Contains("User Not Found!"));
+        }
 
-            Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
+        [Test]
+        public async Task SignIn_WithIncorrectPassword_ReturnsMessageOfIncorrectPassword()
+        {
+            // Arrange
+
+            WebApplicationFactory<Startup> webHost = new WebApplicationFactory<Startup>().WithWebHostBuilder(_ => { });
+
+            HttpClient client = webHost.CreateClient();
+
+            var postRequest = new HttpRequestMessage(HttpMethod.Post, "https://localhost:5001/SignIn/Check");
+            var data = new Dictionary<string, string>
+            {
+                {"login", "admin" },
+                {"password","lalalala" }
+            };
+            postRequest.Content = new FormUrlEncodedContent(data);
+
+            // Act
+            var response = await client.SendAsync(postRequest);
+
+            // Assert
+            response.EnsureSuccessStatusCode();
+            var responseString = await response.Content.ReadAsStringAsync();
+            Assert.IsTrue(responseString.Contains("Incorrect password!"));
+        }
+
+        [Test]
+        public async Task SignIn_WithCorrectData_ReturnsToHomePageWithSuccessMessage()
+        {
+            // Arrange
+
+            WebApplicationFactory<Startup> webHost = new WebApplicationFactory<Startup>().WithWebHostBuilder(_ => { });
+
+            HttpClient client = webHost.CreateClient();
+
+            var postRequest = new HttpRequestMessage(HttpMethod.Post, "https://localhost:5001/SignIn/Check");
+            var data = new Dictionary<string, string>
+            {
+                {"login", "admin" },
+                {"password","1234" }
+            };
+            postRequest.Content = new FormUrlEncodedContent(data);
+
+            // Act
+            var response = await client.SendAsync(postRequest);
+
+            // Assert
+            response.EnsureSuccessStatusCode();
+            var responseString = await response.Content.ReadAsStringAsync();
+            Assert.IsTrue(responseString.Contains("System message: Everything all right!"));
+        }
+
+        [Test]
+        public async Task AccessToAdminMenu_WithAuthorizingAsCustomer_ReturnsMessageOfNotEnoughRights()
+        {
+            // Arrange
+
+            WebApplicationFactory<Startup> webHost = new WebApplicationFactory<Startup>().WithWebHostBuilder(_ => { });
+
+            HttpClient client = webHost.CreateClient();
+
+            var postRequest = new HttpRequestMessage(HttpMethod.Post, "https://localhost:5001/SignIn/Check");
+            var data = new Dictionary<string, string>
+            {
+                {"login", "login" },
+                {"password","password" }
+            };
+            postRequest.Content = new FormUrlEncodedContent(data);
+
+            // Act
+            var response = await client.SendAsync(postRequest);
+            response.EnsureSuccessStatusCode();
+
+            var accessResponse = await client.GetAsync("https://localhost:5001/Admin");
+            accessResponse.EnsureSuccessStatusCode();
+
+            // Assert
+            
+            var responseString = await accessResponse.Content.ReadAsStringAsync();
+            Assert.IsTrue(responseString.Contains("System message: Not enough rights to access!"));
         }
     }
 }

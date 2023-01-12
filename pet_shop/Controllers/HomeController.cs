@@ -30,11 +30,11 @@ namespace pet_shop.Controllers
             //Console.WriteLine("Я в Index Homecontroller!");
 
             if (Globals.error_code == 0)
-                ViewData["Message"] = "Все в порядке.";
+                ViewData["Message"] = "Everything all right!";
             if (Globals.error_code == 1)
-                ViewData["Message"] = "Вы не авторизованы!";
+                ViewData["Message"] = "You are not authorized!";
             if (Globals.error_code == 2)
-                ViewData["Message"] = "Недостаточно прав для доступа!";
+                ViewData["Message"] = "Not enough rights to access!";
             Globals.error_code = 0;
 
             return View();

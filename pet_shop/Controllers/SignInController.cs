@@ -49,26 +49,25 @@ namespace pet_shop.Controllers
                 var user = rep.GetUserByLogin(login);
                 if (user == null)
                 {
-                    ViewData["Message"] = "Пользователь не найден!";
+                    ViewData["Message"] = "User Not Found!";
                     return View("Index", "SignIn");
                 }
 
                 if (user.password != password)
                 {
-                    ViewData["Message"] = "Неправильный пароль!";
+                    ViewData["Message"] = "Incorrect password!";
                     return View("Index", "SignIn");
                 }
 
                 Globals.user = user;
 
-                ViewData["Message"] = "Вы успешно авторизовались!";
                 Console.WriteLine("Вы успешно авторизовались!");
                 return RedirectToAction("Index", "Home");
             }
             catch (Exception e)
             {
                 Console.WriteLine("Error: " + e);
-                ViewData["Message"] = "Возникла ошибка при авторизации!";
+                ViewData["Message"] = "Error while authorizing!";
                 return RedirectToAction("Error", "Home");
             }
         }
