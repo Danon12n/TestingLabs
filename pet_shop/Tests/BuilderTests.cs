@@ -6,10 +6,18 @@ using pet_shop.Builder;
 
 namespace pet_shop.Tests
 {
+
+
     [AllureNUnit]
     [AllureLink("https://github.com/Danon12n/TestingLabs")]
     public class BuilderTests
     {
+        [OneTimeSetUp]
+        public void ClearResultsDir()
+        {
+            AllureLifecycle.Instance.CleanupResultDirectory();
+        }
+
         public bool checkFood(PetsFood food, string expectedState, string expectedAnimal)
         {
             if (food.state == expectedState && food.animal == expectedAnimal) { return true; }
