@@ -71,7 +71,7 @@ namespace pet_shop.MySQLRepository
 
         public void DeleteShopById(int id)
         {
-            string sql = "Delete from 'shops' where Shop_id=" + id;
+            string sql = "Delete from `shops` where shop_id = " + id;
             cmd = new MySqlCommand();
             cmd.CommandText = sql;
             cmd.Connection = conn;
