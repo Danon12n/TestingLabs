@@ -61,7 +61,7 @@ namespace pet_shop.MySQLRepository
         }
         public void AddNewShop(Shop shop)
         {
-            string sql = "Insert into 'shops' (Shop_id, adress, city, owner) Values (" + shop.id + ", " + shop.adress + ", " + shop.city + ", " + shop.owner + ")";
+            string sql = "Insert into 'shops' (shop_id, adress, city, owner) Values (" + shop.id + ", " + shop.adress + ", " + shop.city + ", " + shop.owner + ")";
             cmd = new MySqlCommand();
             cmd.CommandText = sql;
             cmd.Connection = conn;
