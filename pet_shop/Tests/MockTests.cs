@@ -70,6 +70,9 @@ namespace MockTests.Tests
 
             // Assert
             Assert.AreEqual(expected, actual);
+            AllureLifecycle.Instance.WrapInStep(
+            () => { Assert.IsTrue(expected.Equals(actual), $"Oh no"); },
+            "Validate calculations");
         }
 
 
@@ -90,7 +93,10 @@ namespace MockTests.Tests
             var result = helper.CheckFreeId(25);
 
             // Assert
-            Assert.AreEqual(result, "Такой питомец существует");
+            AllureLifecycle.Instance.WrapInStep(
+            () => { Assert.IsTrue(result.Equals("Такой питомец существует"), $"Oh no"); },
+            "Validate calculations");
+
         }
 
 
