@@ -12,6 +12,7 @@ using pet_shop.Controllers;
 using NUnit.Framework.Constraints;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections;
+using pet_shop.Buider;
 
 namespace pet_shop.Tests
 {
@@ -19,6 +20,7 @@ namespace pet_shop.Tests
     [AllureLink("https://github.com/Danon12n/TestingLabs")]
     public class UnitTests
     {
+
 
         //Allure.Steps required
         [AllureStep("This method is just saying hello")]
@@ -85,7 +87,7 @@ namespace pet_shop.Tests
             UserMySQLRepository rep = new UserMySQLRepository();
             //Act
             User newUser = rep.GetUserById(1);
-            User expectedUser = new User(id:1,login: "admin", password: "1234", name: "admin", surname: "admin", role: "admin");
+            User expectedUser = new User(id: 1, login: "admin", password: "1234", name: "admin", surname: "admin", role: "admin");
             //Wrapping Step
             AllureLifecycle.Instance.WrapInStep(
                 () => { Assert.IsTrue(newUser.Equals(expectedUser), $"Oh no"); },
@@ -136,8 +138,8 @@ namespace pet_shop.Tests
 
         }
 
-        
-         
+
+
         [Test]
         [AllureTag("NUnit", "Debug")]
         [AllureIssue("GitHub#1", "https://github.com/Danon12n/TestingLabs")]
@@ -153,7 +155,7 @@ namespace pet_shop.Tests
             rep.DeleteUserById(expectedUser.id);
 
             expectedUser = rep.GetUserByLogin("test");
-            
+
             //Wrapping Step
             AllureLifecycle.Instance.WrapInStep(
                 () => { Assert.IsTrue(expectedUser == null, $"Oh no"); },
@@ -169,7 +171,7 @@ namespace pet_shop.Tests
             {
                 if (order[0] != expected[i])
                 {
-                    isEveryEqual = false; 
+                    isEveryEqual = false;
                     break;
                 }
                 i++;
@@ -209,7 +211,7 @@ namespace pet_shop.Tests
         {
             //Arrange
             OrderMySqlRepository rep = new OrderMySqlRepository();
-            List<int> expectedOrders = new List<int> { -10};
+            List<int> expectedOrders = new List<int> { -10 };
             Order newOrder = new Order(-10, -10);
             //Act
             rep.CreateOrder(newOrder);
@@ -219,7 +221,7 @@ namespace pet_shop.Tests
                 () => { Assert.IsTrue(CheckOrders(resultOrders, expectedOrders), $"Oh no! "); },
                 "Validate calculations");
         }
-        
+
 
         [Test]
         [AllureTag("NUnit", "Debug")]
@@ -241,7 +243,7 @@ namespace pet_shop.Tests
                 () => { Assert.IsTrue(rep.GetOrderedPets(-10).Capacity == 0, $"Oh no! "); },
                 "Validate calculations");
         }
-        
+
 
         [Test]
         [AllureTag("NUnit", "Debug")]
@@ -268,7 +270,7 @@ namespace pet_shop.Tests
             {
                 if (order.Equals(expectedOrders[0]) || order.Equals(expectedOrders[1]))
                 {
-                    flag++; 
+                    flag++;
                 }
             }
             var orderedPets = rep.GetOrderedPets(-10);
@@ -281,11 +283,165 @@ namespace pet_shop.Tests
                 () => { Assert.IsTrue(flag == 2, $"Oh no! "); },
                 "Validate calculations");
         }
+        [Test]
+        [AllureTag("NUnit", "Debug")]
+        [AllureIssue("GitHub#1", "https://github.com/Danon12n/TestingLabs")]
+        [AllureSeverity(SeverityLevel.critical)]
+        [AllureFeature("OrderMySQLRepository")]
+        [AllureId(44)]
+        public void FilterResult_HandlesInvalidInput()
+        {
+            // Arrange
+            var petRepo = new PetMySQLRepository();
+            string petType = "invalid_input";
+            string gender = "invalid_input";
+            int canSwim = 3;
+            int reproduceAbility = 3;
+            int priceFrom = -1;
+            int priceTo = -1;
+            string adress = "invalid_input";
+
+            // Act
+            List<DisplayInfo> petInfos = petRepo.FilterResult(petType, gender, canSwim, reproduceAbility, priceFrom, priceTo, adress);
+
+            // Assert
+            AllureLifecycle.Instance.WrapInStep(
+            () => { Assert.IsEmpty(petInfos, $"Oh no! "); },
+            "Validate calculations");
+        }
 
 
+        [Test]
+        [AllureTag("NUnit", "Debug")]
+        [AllureIssue("GitHub#1", "https://github.com/Danon12n/TestingLabs")]
+        [AllureSeverity(SeverityLevel.critical)]
+        [AllureFeature("OrderMySQLRepository")]
+        [AllureId(45)]
+        public void GetPetById_Test()
+        {
+            // Arrange
+            var petRepo = new PetMySQLRepository();
+            int id = 1;
+
+            // Act
+            Pet testpet = petRepo.GetPetById(id);
+
+            // Assert
+            AllureLifecycle.Instance.WrapInStep(
+            () => { Assert.IsTrue(testpet.availability == "yes", $"Oh no! "); },
+            "Validate calculations");
+        }
 
 
+        [Test]
+        [AllureTag("NUnit", "Debug")]
+        [AllureIssue("GitHub#1", "https://github.com/Danon12n/TestingLabs")]
+        [AllureSeverity(SeverityLevel.critical)]
+        [AllureFeature("OrderMySQLRepository")]
+        [AllureId(47)]
+        public void DeleteShop_Test()
+        {
+            try
+            {
+
+                // Arrange
+                var shopRepo = new ShopMySQLRepository();
+                Shop shop = new Shop(556, "Волгоградский проспект", "Москва", "Власов");
+                shopRepo.AddNewShop(shop);
+                var result = shopRepo.GetShopIdByAdress("Волгоградский проспект");
+                if (result != 556) throw new Exception("Database Error");
+
+                // Act
+                shopRepo.DeleteShopById(556);
+                var result2 = shopRepo.GetShopIdByAdress("Волгоградский проспект");
+
+                // Assert
+                AllureLifecycle.Instance.WrapInStep(
+                () => { Assert.IsTrue(result == -10, $"Oh no! "); },
+                "Validate calculations");
+
+            }
+            finally
+            {
+                var shopRepo = new ShopMySQLRepository();
+                shopRepo.DeleteShopById(556);
+            }
+
+        }
+
+
+        [Test]
+        [AllureTag("NUnit", "Debug")]
+        [AllureIssue("GitHub#1", "https://github.com/Danon12n/TestingLabs")]
+        [AllureSeverity(SeverityLevel.critical)]
+        [AllureFeature("OrderMySQLRepository")]
+        [AllureId(46)]
+        public void AddGetShop_Test()
+        {
+            try
+            {
+
+            // Arrange
+            var shopRepo = new ShopMySQLRepository();
+            Shop shop = new Shop(556, "Волгоградский проспект", "Москва", "Власов");
+            shopRepo.AddNewShop(shop);
+
+            // Act
+                var result = shopRepo.GetShopIdByAdress("Волгоградский проспект");
+
+            // Assert
+                AllureLifecycle.Instance.WrapInStep(
+                () => { Assert.IsTrue(result == 556, $"Oh no! "); },
+                "Validate calculations");
+
+            }
+            finally
+            {
+                var shopRepo = new ShopMySQLRepository();
+                shopRepo.DeleteShopById(556);
+            }
+
+        }
+
+        [Test]
+        [AllureTag("NUnit", "Debug")]
+        [AllureIssue("GitHub#1", "https://github.com/Danon12n/TestingLabs")]
+        [AllureSeverity(SeverityLevel.critical)]
+        [AllureFeature("OrderMySQLRepository")]
+        [AllureId(49)]
+        public void AddOrder_Test()
+        {
+            try
+            {
+
+                // Arrange
+                var orderRepo = new OrderMySqlRepository();
+                Order order = new Order(-10, -10, -10);
+                var ExpectedList = new List<int> { -10 };
+                orderRepo.CreateOrder(order);
+
+                // Act
+                var result = orderRepo.GetOrderedPets(-10);
+
+                // Assert
+                AllureLifecycle.Instance.WrapInStep(
+                () => { Assert.IsTrue(result.Contains(ExpectedList), $"Oh no! "); },
+                "Validate calculations");
+
+            }
+            finally
+            {
+                var orderRepo = new OrderMySqlRepository();
+                orderRepo.DeleteOrderByNumber(-10);
+            }
+
+        }
 
 
     }
+
+
+
+
 }
+
