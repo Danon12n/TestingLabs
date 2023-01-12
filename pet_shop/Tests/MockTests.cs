@@ -64,9 +64,7 @@ namespace MockTests.Tests
             List<string> actual = controller.ViewBag.Shops as List<string>;
 
             // Assert
-            AllureLifecycle.Instance.WrapInStep(
-            () => { Assert.IsTrue(expected.Equals(actual), $"Oh no"); },
-            "Validate calculations");
+            Assert.AreEqual(expected, actual);
         }
 
 
