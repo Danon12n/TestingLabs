@@ -62,10 +62,10 @@ namespace pet_shop.MySQLRepository
 
         public void AddNewShop(Shop shop)
         {
-            string sql = "Insert into 'shops' (shop_id, adress, city, owner) values (@id, @adress, @city, @owner) ";
+            string sql = "Insert into shops (shop_id, adress, city, owner) values (@shop_id, @adress, @city, @owner) ";
             cmd = new MySqlCommand();
             cmd.CommandText = sql;
-            cmd.Parameters.Add("@id", MySqlDbType.Int16).Value = shop.id;
+            cmd.Parameters.Add("@shop_id", MySqlDbType.Int32).Value = shop.id;
             cmd.Parameters.Add("@adress", MySqlDbType.String).Value = shop.adress;
             cmd.Parameters.Add("@city", MySqlDbType.String).Value = shop.city;
             cmd.Parameters.Add("@owner", MySqlDbType.String).Value = shop.owner;
@@ -86,8 +86,8 @@ namespace pet_shop.MySQLRepository
 
         public int GetShopIdByAdress(string adress)
         {
-            // Команда select.
-            string sql = "Select * from `shops` where adress like @adress";
+            cmd = new MySqlCommand();
+            string sql = "Select * from shops where adress like @adress ";
 
             cmd.CommandText = sql;
             cmd.Connection = conn;

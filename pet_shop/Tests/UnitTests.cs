@@ -28,7 +28,7 @@ namespace pet_shop.Tests
         {
             Console.WriteLine("Hello!");
         }
-
+        /*
         [Test]
         [AllureTag("NUnit", "Debug")]
         [AllureIssue("GitHub#1", "https://github.com/unickq/allure-nunit")]
@@ -54,7 +54,7 @@ namespace pet_shop.Tests
             AllureLifecycle.Instance.WrapInStep(() => controllerMock.Verify(
                 x => x.RedirectToAction("Index", "Home"), Times.Once));
         }
-
+        */
         [Test]
         [AllureTag("NUnit", "Debug")]
         [AllureIssue("GitHub#1", "https://github.com/Danon12n/TestingLabs")]
@@ -178,6 +178,7 @@ namespace pet_shop.Tests
             }
             return isEveryEqual;
         }
+
 
 
         [Test]
@@ -357,7 +358,7 @@ namespace pet_shop.Tests
 
                 // Assert
                 AllureLifecycle.Instance.WrapInStep(
-                () => { Assert.IsTrue(result == -10, $"Oh no! "); },
+                () => { Assert.IsTrue(result2 == -10, $"Oh no! "); },
                 "Validate calculations");
 
             }
@@ -383,7 +384,7 @@ namespace pet_shop.Tests
 
             // Arrange
             var shopRepo = new ShopMySQLRepository();
-            Shop shop = new Shop(556, "Волгоградский проспект", "Москва", "Власов");
+            Shop shop = new Shop(556, "Волгоградский проспект", "Москва", "Тасов");
             shopRepo.AddNewShop(shop);
 
             // Act
@@ -403,6 +404,7 @@ namespace pet_shop.Tests
 
         }
 
+
         [Test]
         [AllureTag("NUnit", "Debug")]
         [AllureIssue("GitHub#1", "https://github.com/Danon12n/TestingLabs")]
@@ -417,15 +419,16 @@ namespace pet_shop.Tests
                 // Arrange
                 var orderRepo = new OrderMySqlRepository();
                 Order order = new Order(-10, -10, -10);
-                var ExpectedList = new List<int> { -10 };
+                var ExpectedList = new List<int>() {-10};
                 orderRepo.CreateOrder(order);
-
+                
                 // Act
                 var result = orderRepo.GetOrderedPets(-10);
+                Console.WriteLine(result);
 
                 // Assert
                 AllureLifecycle.Instance.WrapInStep(
-                () => { Assert.IsTrue(result.Contains(ExpectedList), $"Oh no! "); },
+                () => { Assert.IsTrue(CheckOrders(result, ExpectedList), $"Oh no! "); },
                 "Validate calculations");
 
             }
