@@ -72,6 +72,13 @@ namespace MockTests.Tests
             Assert.AreEqual(expected, actual);
         }
 
+
+        [Test]
+        [AllureTag("NUnit", "Debug")]
+        [AllureIssue("GitHub#1", "https://github.com/Danon12n/TestingLabs")]
+        [AllureSeverity(SeverityLevel.critical)]
+        [AllureFeature("CustomerController")]
+        [AllureId(2)]
         public void CheckFreeIdPetMockTest()
         {
             // Arrange
