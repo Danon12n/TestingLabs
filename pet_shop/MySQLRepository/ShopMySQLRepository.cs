@@ -68,6 +68,17 @@ namespace pet_shop.MySQLRepository
             int rowCount = cmd.ExecuteNonQuery();
 
         }
+
+        public void DeleteShopById(int id)
+        {
+            string sql = "Delete from 'shops' where id=" + id;
+            cmd = new MySqlCommand();
+            cmd.CommandText = sql;
+            cmd.Connection = conn;
+            int rowCount = cmd.ExecuteNonQuery();
+
+        }
+
         public int GetShopIdByAdress(string adress)
         {
             // Команда select.
