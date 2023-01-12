@@ -8,7 +8,6 @@ using System.Data.Common;
 using System.Data;
 using pet_shop.DB;
 using pet_shop.Models;
-using pet_shop.IRepository;
 
 namespace pet_shop.MySQLRepository
 {
