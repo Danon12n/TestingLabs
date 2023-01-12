@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using pet_shop.Buider;
 
 namespace pet_shop.Models
 {
@@ -19,6 +20,8 @@ namespace pet_shop.Models
             this.city = city;
             this.owner = owner;
         }
+
+
         public int id { get; set; }
         public string adress { get; set; }
         public string city { get; set; }
