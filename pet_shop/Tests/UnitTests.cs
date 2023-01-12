@@ -298,7 +298,7 @@ namespace pet_shop.Tests
             // Arrange
             var mock = new Mock<IShopMySQLRepository>();
             mock.Setup(a => a.GetShops()).Returns(new List<Shop>() { new Shop() });
-            CustomerController controller = new CustomerController(mock.Object);
+            CustomerController controller = new CustomerController();
             List<string> expected = new List<string> { 
                 "6275_Misty_Pines",
                 "2690_Round_Elk_Ledge",

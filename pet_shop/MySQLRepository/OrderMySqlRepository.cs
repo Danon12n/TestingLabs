@@ -11,7 +11,7 @@ using pet_shop.Models;
 
 namespace pet_shop.MySQLRepository
 {
-    public class OrderMySqlRepository
+    public class OrderMySqlRepository : IOrderMySqlRepository
     {
         private MySqlCommand cmd = new MySqlCommand(); // команда для совершения sql-запроса
         private MySqlConnection conn = DBUtils.GetDBConnection(); //подключение базы
