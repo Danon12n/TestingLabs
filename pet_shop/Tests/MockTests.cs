@@ -38,7 +38,7 @@ namespace MockTests.Tests
         [AllureIssue("GitHub#1", "https://github.com/Danon12n/TestingLabs")]
         [AllureSeverity(SeverityLevel.critical)]
         [AllureFeature("CustomerController")]
-        [AllureId(1)]
+        [AllureId(23)]
         public void ShowFilteredTableTest()
         {
             // Arrange
@@ -68,7 +68,6 @@ namespace MockTests.Tests
             List<string> actual = controller.ViewBag.Shops as List<string>;
 
             // Assert
-            Assert.AreEqual(expected, actual);
             AllureLifecycle.Instance.WrapInStep(
             () => { Assert.IsTrue(expected.Equals(actual), $"Oh no"); },
             "Validate calculations");
@@ -80,7 +79,7 @@ namespace MockTests.Tests
         [AllureIssue("GitHub#1", "https://github.com/Danon12n/TestingLabs")]
         [AllureSeverity(SeverityLevel.critical)]
         [AllureFeature("CustomerController")]
-        [AllureId(2)]
+        [AllureId(22)]
         public void CheckFreeIdPetMockTest()
         {
             // Arrange
