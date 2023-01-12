@@ -28,33 +28,6 @@ namespace pet_shop.Tests
         {
             Console.WriteLine("Hello!");
         }
-        /*
-        [Test]
-        [AllureTag("NUnit", "Debug")]
-        [AllureIssue("GitHub#1", "https://github.com/unickq/allure-nunit")]
-        [AllureSeverity(SeverityLevel.critical)]
-        [AllureFeature("Core")]
-        [AllureId(2)]
-        public void AddPetLondon()
-        {
-            //Arrange
-            SayHello();
-            var formCol = new FormCollection(new Dictionary<string, Microsoft.Extensions.Primitives.StringValues>
-                {
-                    { "shop_id", "1" },
-                    { "price", "200" },
-                    { "can_swim", "Yes" },
-                    {"reporoduce_ability", "Yes" }
-                });
-            var controllerMock = new Mock<VendorController>();
-            controllerMock.Setup(x => x.AddNewPet(formCol));
-            //Act
-            controllerMock.Object.AddNewPet(formCol);
-            //Assert
-            AllureLifecycle.Instance.WrapInStep(() => controllerMock.Verify(
-                x => x.RedirectToAction("Index", "Home"), Times.Once));
-        }
-        */
         [Test]
         [AllureTag("NUnit", "Debug")]
         [AllureIssue("GitHub#1", "https://github.com/Danon12n/TestingLabs")]
@@ -418,8 +391,8 @@ namespace pet_shop.Tests
 
                 // Arrange
                 var orderRepo = new OrderMySqlRepository();
-                Order order = new Order(-10, -10, -10);
-                var ExpectedList = new List<int>() {-10};
+                Order order = new Order(-30, -30, -30);
+                var ExpectedList = new List<int>() { -30 };
                 orderRepo.CreateOrder(order);
                 
                 // Act
@@ -435,7 +408,7 @@ namespace pet_shop.Tests
             finally
             {
                 var orderRepo = new OrderMySqlRepository();
-                orderRepo.DeleteOrderByNumber(-10);
+                orderRepo.DeleteOrderByNumber(-30);
             }
 
         }
