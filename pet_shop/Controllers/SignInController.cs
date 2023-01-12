@@ -61,13 +61,14 @@ namespace pet_shop.Controllers
 
                 Globals.user = user;
 
-
+                ViewData["Message"] = "Вы успешно авторизовались!";
                 Console.WriteLine("Вы успешно авторизовались!");
                 return RedirectToAction("Index", "Home");
             }
             catch (Exception e)
             {
                 Console.WriteLine("Error: " + e);
+                ViewData["Message"] = "Возникла ошибка при авторизации!";
                 return RedirectToAction("Error", "Home");
             }
         }
