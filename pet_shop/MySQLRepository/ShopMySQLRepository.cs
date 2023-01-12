@@ -59,7 +59,15 @@ namespace pet_shop.MySQLRepository
             }
             return shops;
         }
+        public void AddNewShop(Shop shop)
+        {
+            string sql = "Insert into 'shops' (Shop_id, adress, city, owner) Values (" + shop.id + ", " + shop.adress + ", " + shop.city + ", " + shop.owner + ")";
+            cmd = new MySqlCommand();
+            cmd.CommandText = sql;
+            cmd.Connection = conn;
+            int rowCount = cmd.ExecuteNonQuery();
 
+        }
         public int GetShopIdByAdress(string adress)
         {
             // Команда select.
