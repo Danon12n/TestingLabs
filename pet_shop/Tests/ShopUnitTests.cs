@@ -35,7 +35,11 @@ namespace pet_shop.Tests
         [AllureIssue("GitHub#1", "https://github.com/Danon12n/TestingLabs")]
         [AllureSeverity(SeverityLevel.critical)]
         [AllureFeature("UserMySQLRepository")]
+<<<<<<< Updated upstream
         [AllureId(333)]
+=======
+        [AllureId(21)]
+>>>>>>> Stashed changes
         public void GetUserByIdTest()
         {
             //Arrange
