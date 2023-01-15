@@ -14,11 +14,13 @@ namespace pet_shop.MySQLRepository
     public class ShopMySQLRepository : IShopMySQLRepository
     {
 
-        private MySqlCommand cmd = new MySqlCommand(); // команда для совершения sql-запроса
-        private MySqlConnection conn = DBUtils.GetDBConnection(); //подключение базы
+        private MySqlCommand cmd; // команда для совершения sql-запроса
+        private MySqlConnection conn; //подключение базы
 
         public ShopMySQLRepository()
         {
+            cmd = new MySqlCommand();
+            conn = DBUtils.GetDBConnection();
             try
             {
                 this.conn.Open();
@@ -27,6 +29,25 @@ namespace pet_shop.MySQLRepository
             {
                 Console.WriteLine("Error: " + e.Message);
             }
+        }
+        public ShopMySQLRepository(string connString)
+        {
+            cmd = new MySqlCommand();
+            conn = DBUtils.GetDBConnection(connString);
+            try
+            {
+                this.conn.Open();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error: " + e.Message);
+            }
+        }
+
+        ~ShopMySQLRepository() //чтобы деструктор завершал соединение при закрытии программы
+        {
+            conn.Close();
+            conn.Dispose();
         }
 
         public List<Shop> GetShops() //получение всех пользователей

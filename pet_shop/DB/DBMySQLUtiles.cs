@@ -10,8 +10,7 @@ namespace pet_shop.DB
 {
     public class DBMySQLUtiles
     {
-        public static MySqlConnection
-                GetDBConnection(string host, int port, string database, string username, string password)
+        public static MySqlConnection GetDBConnection(string host, int port, string database, string username, string password)
         {
             // Connection String.
             String connString = "Server=" + host + ";Database=" + database
@@ -21,6 +20,10 @@ namespace pet_shop.DB
             MySqlConnection conn = new MySqlConnection(connString);
 
             return conn;
+        }
+        public static MySqlConnection GetDBConnection(string connString)
+        {
+            return new MySqlConnection(connString);
         }
     }
 }

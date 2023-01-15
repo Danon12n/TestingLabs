@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
 using MySql.Data.MySqlClient;
 
 namespace pet_shop.DB
@@ -18,6 +17,11 @@ namespace pet_shop.DB
             string password = "root";
 
             return DBMySQLUtiles.GetDBConnection(host, port, database, username, password);
+        }
+
+        public static MySqlConnection GetDBConnection(string connString)
+        {
+            return DBMySQLUtiles.GetDBConnection(connString);
         }
     }
 }

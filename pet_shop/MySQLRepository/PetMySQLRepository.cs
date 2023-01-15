@@ -13,11 +13,26 @@ namespace pet_shop.MySQLRepository
 {
     public class PetMySQLRepository : IPetMySQLRepository
     {
-        private MySqlCommand cmd = new MySqlCommand(); // команда для совершения sql-запроса
-        private MySqlConnection conn = DBUtils.GetDBConnection(); //подключение базы
+        private MySqlCommand cmd; // команда для совершения sql-запроса
+        private MySqlConnection conn; //подключение базы
 
         public PetMySQLRepository()
         {
+            cmd = new MySqlCommand();
+            conn = DBUtils.GetDBConnection();
+            try
+            {
+                this.conn.Open();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error: " + e.Message);
+            }
+        }
+        public PetMySQLRepository(string connString)
+        {
+            cmd = new MySqlCommand();
+            conn = DBUtils.GetDBConnection(connString);
             try
             {
                 this.conn.Open();
