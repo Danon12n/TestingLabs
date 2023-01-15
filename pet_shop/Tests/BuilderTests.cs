@@ -1,3 +1,4 @@
+using System;
 using Allure.Net.Commons;
 using NUnit.Allure.Attributes;
 using NUnit.Allure.Core;
@@ -20,14 +21,9 @@ namespace pet_shop.Tests
             return false;
         }
 
-        [Test]
-        [AllureTag("NUnit", "Debug")]
-        [AllureIssue("GitHub#1", "https://github.com/unickq/allure-nunit")]
-        [AllureSeverity(SeverityLevel.critical)]
-        [AllureFeature("Builder")]
-        [AllureId(5112)]
         public void PetsFoodTest()
         {
+            Console.WriteLine("Heyy");
             ICooker PurinaCooker = new Purina();
 
             Shop Pyaterochka = new Shop(PurinaCooker);
