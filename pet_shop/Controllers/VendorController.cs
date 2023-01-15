@@ -99,6 +99,49 @@ namespace pet_shop.Controllers
                 return RedirectToAction("Error", "Home");
             }
         }
+
+        [HttpPost]
+        public ActionResult AddNewPet(IFormCollection collection, string connString)
+        {
+            try
+            {
+                var petRep = new PetMySQLRepository(connString);
+                var shopRep = new ShopMySQLRepository(connString);
+
+                int shopId = shopRep.GetShopIdByAdress(collection["shop_id"]);
+                if (shopId == -10)
+                {
+                    Console.WriteLine("AddNewPet: There is no such shop");
+                    return RedirectToAction("Index");
+                }
+
+                int petId = petRep.GetPetNewId();
+                Console.WriteLine("PetId = " + petId + "\nshopId = " + shopId);
+
+
+                var pet = new Pet(petId, shopId, Convert.ToInt32(collection["price"]));
+                petRep.AddPetPrice(pet);
+
+                int canSwinBit = 0;
+                int canReproduceBit = 0;
+
+                if (collection["can_swim"] == "Yes")
+                    canSwinBit = 1;
+                if (collection["reproduce_ability"] == "Yes")
+                    canReproduceBit = 1;
+
+                var PI = new PetInfo(pet.pet_id, collection["pet_type"], collection["name"],
+                    Convert.ToInt32(collection["age"]), collection["color"], canSwinBit, canReproduceBit, collection["gender"], collection["pet_breed"]);
+                petRep.AddPetInfo(PI);
+
+                return RedirectToAction("Index", "Home");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error: " + e);
+                return RedirectToAction("Error", "Home");
+            }
+        }
         [HttpPost]
         public ActionResult RefuseOrder(IFormCollection collection)
         {
