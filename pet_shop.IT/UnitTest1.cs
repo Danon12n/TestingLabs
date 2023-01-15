@@ -16,6 +16,9 @@ using System.Text;
 using System.Threading.Tasks;
 using pet_shop.Models;
 using Microsoft.AspNetCore.Http;
+using static System.Net.Mime.MediaTypeNames;
+using System.Reflection;
+using System.IO;
 
 namespace pet_shop.IntegrationTests
 {
@@ -30,9 +33,12 @@ namespace pet_shop.IntegrationTests
         {
 
             testConn.Open();
+            var path = System.IO.Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+            var fullpath = Path.GetFullPath(Path.Combine(path, @"..\..\..\"));
+            string script = File.ReadAllText(Path.Combine(fullpath,"pet_shop_test.sql"));
+            Console.WriteLine(Path.Combine(fullpath, "pet_shop_test.sql"));
 
-            string script = File.ReadAllText("H:\\GitHub\\my-useful-site\\TestingLabs\\pet_shop.IT\\pet_shop_test.sql");
-
+        
             script = script.Replace("-- Database: `pet_shop`", $"-- Database: `{database}`");
             connString = $"Server=localhost;Database={database};User Id=root;port=3306;password=root;SSL Mode=none";
 
