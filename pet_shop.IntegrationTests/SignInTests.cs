@@ -82,7 +82,7 @@ namespace pet_shop.IntegrationTests
             var postRequest = new HttpRequestMessage(HttpMethod.Post, "https://localhost:5001/SignIn/Check");
             var data = new Dictionary<string, string>
             {
-                {"login", "admin" },
+                {"login", "customer" },
                 {"password","1234" }
             };
             postRequest.Content = new FormUrlEncodedContent(data);
@@ -108,7 +108,7 @@ namespace pet_shop.IntegrationTests
             var postRequest = new HttpRequestMessage(HttpMethod.Post, "https://localhost:5001/SignIn/Check");
             var data = new Dictionary<string, string>
             {
-                {"login", "login" },
+                {"login", "login123" },
                 {"password","password" }
             };
             postRequest.Content = new FormUrlEncodedContent(data);

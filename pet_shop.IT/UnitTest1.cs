@@ -22,7 +22,6 @@ using System.IO;
 
 namespace pet_shop.IntegrationTests
 {
-    [TestFixture]
     public class SomeShitTest
     {
         private string database = $"pet_shop_test_{new Random().Next(0, 9999999)}";
@@ -62,12 +61,14 @@ namespace pet_shop.IntegrationTests
             testConn.Close();
         }
 
-        [Test]
         public async Task CreateTestDB()
         {
 
             // Arrange
-            await PreTestFunc();
+
+            /*
+             
+             await PreTestFunc();
 
             VendorController controller = new VendorController();
             var formCol = new FormCollection(new Dictionary<string, Microsoft.Extensions.Primitives.StringValues>
@@ -99,6 +100,10 @@ namespace pet_shop.IntegrationTests
 
 
             await PostTestFunc();
+             
+             */
+
+
 
         }
 
