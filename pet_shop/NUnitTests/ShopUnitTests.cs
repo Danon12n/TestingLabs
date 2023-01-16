@@ -15,27 +15,15 @@ using System.Collections;
 
 namespace pet_shop.Tests
 {
-    [AllureNUnit]
-    [AllureLink("https://github.com/Danon12n/TestingLabs")]
     public class ShopUnitTests
     {
        
 
-        //Allure.Steps required
-        [AllureStep("This method is just saying hello")]
-        private void SayHello()
-        {
-            Console.WriteLine("Hello!");
-        }
+       
 
 
 
-        [Test]
-        [AllureTag("NUnit", "Debug")]
-        [AllureIssue("GitHub#1", "https://github.com/Danon12n/TestingLabs")]
-        [AllureSeverity(SeverityLevel.critical)]
-        [AllureFeature("UserMySQLRepository")]
-        [AllureId(333)]
+        
         public void GetUserByIdTest()
         {
             //Arrange

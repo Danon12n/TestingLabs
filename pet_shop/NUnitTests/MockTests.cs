@@ -16,25 +16,13 @@ using pet_shop.HelperClasses;
 
 namespace MockTests.Tests
 {
-    [AllureNUnit]
-    [AllureLink("https://github.com/Danon12n/TestingLabs")]
+    
     public class MockTests
     {
         
 
-        //Allure.Steps required
-        [AllureStep("This method is just saying hello")]
-        private void SayHello()
-        {
-            Console.WriteLine("Hello!");
-        }
-
-        [Test]
-        [AllureTag("NUnit", "Debug")]
-        [AllureIssue("GitHub#1", "https://github.com/Danon12n/TestingLabs")]
-        [AllureSeverity(SeverityLevel.critical)]
-        [AllureFeature("CustomerController")]
-        [AllureId(233)]
+        
+       
         public void ShowFilteredTableTest()
         {
             // Arrange
@@ -68,12 +56,8 @@ namespace MockTests.Tests
         }
 
 
-        [Test]
-        [AllureTag("NUnit", "Debug")]
-        [AllureIssue("GitHub#1", "https://github.com/Danon12n/TestingLabs")]
-        [AllureSeverity(SeverityLevel.critical)]
-        [AllureFeature("CustomerController")]
-        [AllureId(222)]
+        
+       
         public void CheckFreeIdPetMockTest()
         {
             // Arrange

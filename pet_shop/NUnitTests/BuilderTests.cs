@@ -9,8 +9,6 @@ namespace pet_shop.Tests
 {
 
 
-    [AllureNUnit]
-    [AllureLink("https://github.com/Danon12n/TestingLabs")]
     public class BuilderTests
     {
        

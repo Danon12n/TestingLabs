@@ -14,7 +14,6 @@ using pet_shop.Buider;
 
 namespace pet_shop.MSTests
 {
-    [TestClass]
     public class UnitTests
     {
         [TestMethod]
