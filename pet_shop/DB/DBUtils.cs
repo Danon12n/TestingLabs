@@ -10,7 +10,7 @@ namespace pet_shop.DB
     {
         public static MySqlConnection GetDBConnection()
         {
-            string host = "localhost";
+            string host = "192.168.1.69";
             int port = 3306;
             string database = "pet_shop";
             string username = "root";

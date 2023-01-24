@@ -1,0 +1,12 @@
+FROM microsoft/aspnetcore:3.1
+WORKDIR /App
+
+EXPOSE 3306
+
+# Copy everything
+COPY . ./
+
+# Запуск
+#RUN dotnet test
+#ENTRYPOINT ["tail", "-f", "/dev/null"]
+ENTRYPOINT ["/bin/bash", "pet_shop/testLoop.sh"]

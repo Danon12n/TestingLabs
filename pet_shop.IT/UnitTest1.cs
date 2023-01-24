@@ -26,7 +26,7 @@ namespace pet_shop.IntegrationTests
     {
         private string database = $"pet_shop_test_{new Random().Next(0, 9999999)}";
         private string connString;
-        private MySqlConnection testConn = new MySqlConnection($"Server=localhost;User Id=root;port=3306;password=root;SSL Mode=none");
+        private MySqlConnection testConn = new MySqlConnection($"Server=192.168.1.69;User Id=root;port=3306;password=root;SSL Mode=Required");
 
         public async Task PreTestFunc()
         {
@@ -39,7 +39,7 @@ namespace pet_shop.IntegrationTests
 
         
             script = script.Replace("-- Database: `pet_shop`", $"-- Database: `{database}`");
-            connString = $"Server=localhost;Database={database};User Id=root;port=3306;password=root;SSL Mode=none";
+            connString = $"Server=192.168.1.69;Database={database};User Id=root;port=3306;password=root;SSL Mode=Required";
 
             var cmd = new MySqlCommand($"CREATE DATABASE IF NOT EXISTS {database}", testConn);
             await cmd.ExecuteNonQueryAsync();

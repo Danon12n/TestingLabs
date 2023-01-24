@@ -1,0 +1,10 @@
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+FROM mcr.microsoft.com/dotnet/aspnet:6.0
+WORKDIR /app
+
+COPY . ./
+WORKDIR /app
+# Запуск
+#RUN dotnet test
+#ENTRYPOINT ["tail", "-f", "/dev/null"]
+ENTRYPOINT ["/bin/bash", "testLoop.sh"]
